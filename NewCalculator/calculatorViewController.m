@@ -67,14 +67,20 @@
     }
     self.currentOperation = [sender currentTitle];
     self.Display.text = [NSString stringWithFormat:@"%g" ,[self.brain performOperation: self.currentOperation]];
+
+   
 }
 
 - (IBAction)PiConstant:(UIButton *)sender {
     double Pi = 3.1415;
     self.Display.text = [NSString stringWithFormat:@"%g", Pi];
-    [self.brain pushOperand:Pi];
-
 
 }
 
+- (IBAction)Clear {
+    self.Display.text = 0;
+    self.currentOperation = Nil;
+    [self.brain pushOperand:[self.Display.text doubleValue]];
+    self.UserInTheMiddleOfTypping = NO;
+}
 @end
