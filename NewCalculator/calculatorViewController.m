@@ -59,4 +59,12 @@
     self.Display.text = [NSString stringWithFormat:@"%g" ,[self.brain performOperation:[sender currentTitle]]];
 }
 
+- (IBAction)PiConstant:(UIButton *)sender {
+    double Pi = 3.1415;
+    self.Display.text = [NSString stringWithFormat:@"%g", Pi];
+    [self.brain pushOperand:Pi];
+
+
+}
+
 @end
