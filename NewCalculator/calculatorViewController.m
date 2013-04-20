@@ -12,6 +12,7 @@
 @interface calculatorViewController ()
 @property (nonatomic) BOOL UserInTheMiddleOfTypping;
 @property (strong, nonatomic) calculatorbrain *brain;
+@property (strong, nonatomic) NSString *currentOperation;
 @end
 
 @implementation calculatorViewController
@@ -30,6 +31,7 @@
 @synthesize Display;
 @synthesize UserInTheMiddleOfTypping;
 @synthesize brain = _brain;
+@synthesize currentOperation = _currentOperation;
 
 - (calculatorbrain *) brain
 {
@@ -37,6 +39,13 @@
         _brain = [[calculatorbrain alloc] init];
     }
     return _brain;
+}
+- (NSString *) currentOperation
+{
+    if (!_currentOperation) {
+        _currentOperation = [[NSString alloc] init];
+    }
+    return _currentOperation;
 }
 - (IBAction)pressedOperand:(UIButton *)sender {
     NSString *digit = [sender currentTitle];
@@ -56,7 +65,8 @@
     if (UserInTheMiddleOfTypping) {
         [self EnterPressed];
     }
-    self.Display.text = [NSString stringWithFormat:@"%g" ,[self.brain performOperation:[sender currentTitle]]];
+    self.currentOperation = [sender currentTitle];
+    self.Display.text = [NSString stringWithFormat:@"%g" ,[self.brain performOperation: self.currentOperation]];
 }
 
 - (IBAction)PiConstant:(UIButton *)sender {
