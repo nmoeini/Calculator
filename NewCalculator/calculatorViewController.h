@@ -12,4 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *Display;
 
+@property (weak, nonatomic) IBOutlet UITextField *Description;
+
 @end

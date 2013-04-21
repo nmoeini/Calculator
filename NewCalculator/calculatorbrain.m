@@ -52,6 +52,9 @@
     } else if ([@"/" isEqualToString:operation]) {
         double divisor = [self popOperand];
         result = [self popOperand] / divisor;
+    } else if ([@"Pi" isEqualToString:operation]) {
+        double Pivalue = 3.1415;
+        result = Pivalue;
     }
     [self pushOperand:result];
     return result;

@@ -32,6 +32,7 @@
 @synthesize UserInTheMiddleOfTypping;
 @synthesize brain = _brain;
 @synthesize currentOperation = _currentOperation;
+@synthesize Description;
 
 - (calculatorbrain *) brain
 {
@@ -47,6 +48,10 @@
     }
     return _currentOperation;
 }
+- (void) DisplayDescription : (NSString *) descriptionText
+{
+    self.Description.text = [self.Description.text stringByAppendingString:descriptionText];
+}
 - (IBAction)pressedOperand:(UIButton *)sender {
     NSString *digit = [sender currentTitle];
     if (self.UserInTheMiddleOfTypping) {
@@ -55,10 +60,12 @@
         self.Display.text = digit;
         self.UserInTheMiddleOfTypping = YES;
     }
+    [self DisplayDescription: digit];
 }
 - (IBAction)EnterPressed {
     [self.brain pushOperand:[self.Display.text doubleValue]];
     self.UserInTheMiddleOfTypping = NO;
+    [self DisplayDescription: @" "];
 }
 
 - (IBAction)OperationPressed:(UIButton *)sender {
@@ -66,21 +73,14 @@
         [self EnterPressed];
     }
     self.currentOperation = [sender currentTitle];
+    [self DisplayDescription: [self.currentOperation stringByAppendingString:@" "]];
     self.Display.text = [NSString stringWithFormat:@"%g" ,[self.brain performOperation: self.currentOperation]];
-
-   
 }
-
-- (IBAction)PiConstant:(UIButton *)sender {
-    double Pi = 3.1415;
-    self.Display.text = [NSString stringWithFormat:@"%g", Pi];
-
-}
-
 - (IBAction)Clear {
-    self.Display.text = 0;
+    self.Display.text = [NSString stringWithFormat:@"%d", 0];
     self.currentOperation = Nil;
     [self.brain pushOperand:[self.Display.text doubleValue]];
     self.UserInTheMiddleOfTypping = NO;
+    self.Description.text = [NSString stringWithFormat:@"%d", 0];
 }
 @end
