@@ -13,6 +13,7 @@
 @property (nonatomic) BOOL UserInTheMiddleOfTypping;
 @property (strong, nonatomic) calculatorbrain *brain;
 @property (strong, nonatomic) NSString *currentOperation;
+
 @end
 
 @implementation calculatorViewController
@@ -55,7 +56,7 @@
 - (IBAction)pressedOperand:(UIButton *)sender {
     NSString *digit = [sender currentTitle];
     if (self.UserInTheMiddleOfTypping) {
-        self.Display.text = [self.Display.text stringByAppendingString:digit];
+        self.Display.text = [self.Display.text stringByAppendingString: digit];
     } else {
         self.Display.text = digit;
         self.UserInTheMiddleOfTypping = YES;
@@ -82,5 +83,9 @@
     [self.brain pushOperand:[self.Display.text doubleValue]];
     self.UserInTheMiddleOfTypping = NO;
     self.Description.text = [NSString stringWithFormat:@"%d", 0];
+}
+
+- (IBAction)BackSpace {
+    
 }
 @end

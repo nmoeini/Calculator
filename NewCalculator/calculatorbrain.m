@@ -60,4 +60,11 @@
     return result;
 }
 
+- (double) backSpace
+{
+    [self.operandStack removeLastObject];
+    NSNumber *operandObject = [self.operandStack lastObject];
+    return [operandObject doubleValue];
+}
+
 @end
