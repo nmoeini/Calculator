@@ -82,10 +82,16 @@
     self.currentOperation = Nil;
     [self.brain pushOperand:[self.Display.text doubleValue]];
     self.UserInTheMiddleOfTypping = NO;
-    self.Description.text = [NSString stringWithFormat:@"%d", 0];
+    self.Description.text = [NSString stringWithFormat:@" ", nil];
 }
 
 - (IBAction)BackSpace {
-    
+    if (UserInTheMiddleOfTypping) {
+    int DisplayLength = [self.Display.text length] -1 ;
+    self.Display.text = [self.Display.text substringToIndex: DisplayLength];
+    DisplayLength = [self.Description.text length] -1 ;
+    self.Description.text = [self.Description.text substringToIndex: DisplayLength];
+    }
 }
+
 @end
