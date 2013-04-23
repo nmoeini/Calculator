@@ -11,7 +11,7 @@
 
 @interface calculatorViewController ()
 @property (nonatomic) BOOL UserInTheMiddleOfTypping;
-@property (strong, nonatomic) calculatorbrain *brain;
+@property (strong, nonatomic) CalculatorBrain *brain;
 @property (strong, nonatomic) NSString *currentOperation;
 
 @end
@@ -35,13 +35,22 @@
 @synthesize currentOperation = _currentOperation;
 @synthesize Description;
 
-- (calculatorbrain *) brain
+- (CalculatorBrain *) brain
 {
     if (!_brain) {
-        _brain = [[calculatorbrain alloc] init];
+        _brain = [[CalculatorBrain alloc] init];
     }
     return _brain;
 }
+- (IBAction)BackSpace {
+    if (UserInTheMiddleOfTypping) {
+        int DisplayLength = [self.Display.text length] -1 ;
+        self.Display.text = [self.Display.text substringToIndex: DisplayLength];
+        DisplayLength = [self.Description.text length] -1 ;
+        self.Description.text = [self.Description.text substringToIndex: DisplayLength];
+    }
+}
+
 - (NSString *) currentOperation
 {
     if (!_currentOperation) {
@@ -85,13 +94,5 @@
     self.Description.text = [NSString stringWithFormat:@" ", nil];
 }
 
-- (IBAction)BackSpace {
-    if (UserInTheMiddleOfTypping) {
-    int DisplayLength = [self.Display.text length] -1 ;
-    self.Display.text = [self.Display.text substringToIndex: DisplayLength];
-    DisplayLength = [self.Description.text length] -1 ;
-    self.Description.text = [self.Description.text substringToIndex: DisplayLength];
-    }
-}
 
 @end

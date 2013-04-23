@@ -1,5 +1,5 @@
 //
-//  calculatorbrain.h
+//  CalculatorBrain.h
 //  NewCalculator
 //
 //  Created by Navid on 4/20/13.
@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface calculatorbrain : NSObject
+@interface CalculatorBrain : NSObject
 
-- (void) pushOperand : (double) operand;
-- (double) performOperation : (NSString *) operation;
-- (double) backSpace;
+- (void)pushOperand:(double)operand;
+- (double)performOperation:(NSString *)op;
+
+@property (nonatomic, readonly) id program;
+
++ (NSString *)descriptionOfProgram:(id)program;
++ (double)runProgram:(id)program;
 
 @end
