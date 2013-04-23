@@ -63,9 +63,16 @@
     self.Description.text = [self.Description.text stringByAppendingString:descriptionText];
 }
 - (IBAction)pressedOperand:(UIButton *)sender {
+    // this part adds pressed operand button as a digit to the number
     NSString *digit = [sender currentTitle];
     if (self.UserInTheMiddleOfTypping) {
-        self.Display.text = [self.Display.text stringByAppendingString: digit];
+        // this if statement removes 0 from the starting point of number
+        if ([digit isEqualToString:@"."]) {
+        // this part protects calculator from getting unavalable decimal number
+            NSRange range = [self.Display.text rangeOfString:@"."];
+        if (range.location == NSNotFound)
+            self.Display.text = [self.Display.text stringByAppendingString: digit];
+        } else self.Display.text = [self.Display.text stringByAppendingString: digit];
     } else {
         self.Display.text = digit;
         self.UserInTheMiddleOfTypping = YES;
@@ -79,9 +86,7 @@
 }
 
 - (IBAction)OperationPressed:(UIButton *)sender {
-    if (UserInTheMiddleOfTypping) {
-        [self EnterPressed];
-    }
+    if (UserInTheMiddleOfTypping) [self EnterPressed];
     self.currentOperation = [sender currentTitle];
     [self DisplayDescription: [self.currentOperation stringByAppendingString:@" "]];
     self.Display.text = [NSString stringWithFormat:@"%g" ,[self.brain performOperation: self.currentOperation]];

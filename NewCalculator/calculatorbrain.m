@@ -69,7 +69,7 @@
         } else if ([operation isEqualToString:@"/"]) {
             double divisor = [self popOperandOffProgramStack:stack];
             if (divisor) result = [self popOperandOffProgramStack:stack] / divisor;
-        }
+        } else if ([operation isEqualToString:@"Pi"]) result = 3.1415;
     }
     
     return result;
