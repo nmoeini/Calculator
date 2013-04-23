@@ -81,15 +81,17 @@
 }
 - (IBAction)EnterPressed {
     [self.brain pushOperand:[self.Display.text doubleValue]];
+    self.Display.text = [NSString stringWithFormat:@"%g" ,[self.brain performOperation: self.currentOperation]];
     self.UserInTheMiddleOfTypping = NO;
-    [self DisplayDescription: @" "];
+    [self DisplayDescription: @" = "];
 }
 
 - (IBAction)OperationPressed:(UIButton *)sender {
-    if (UserInTheMiddleOfTypping) [self EnterPressed];
+   // if (UserInTheMiddleOfTypping) [self EnterPressed];
+    [self.brain pushOperand:[self.Display.text doubleValue]];
     self.currentOperation = [sender currentTitle];
+        self.UserInTheMiddleOfTypping = NO;
     [self DisplayDescription: [self.currentOperation stringByAppendingString:@" "]];
-    self.Display.text = [NSString stringWithFormat:@"%g" ,[self.brain performOperation: self.currentOperation]];
 }
 - (IBAction)Clear {
     self.Display.text = [NSString stringWithFormat:@"%d", 0];
