@@ -69,7 +69,18 @@
         } else if ([operation isEqualToString:@"/"]) {
             double divisor = [self popOperandOffProgramStack:stack];
             if (divisor) result = [self popOperandOffProgramStack:stack] / divisor;
-        } else if ([operation isEqualToString:@"Pi"]) result = 3.1415;
+        } else if ([operation isEqualToString:@"Pi"]) {
+           result = 3.1415; 
+        } else if ([operation isEqualToString:@"√x"]) {
+            double squaredNumber = [self popOperandOffProgramStack:stack];
+            result = squaredNumber * squaredNumber;
+        } else if ([operation isEqualToString:@"Sin"]) {
+            result = sin([self popOperandOffProgramStack:stack]);
+        } else if ([operation isEqualToString:@"Cos"]) {
+            result = cos([self popOperandOffProgramStack:stack]);
+        } else if ([operation isEqualToString:@"Tan"]) {
+            result = tan([self popOperandOffProgramStack:stack]);
+        }
     }
     
     return result;
